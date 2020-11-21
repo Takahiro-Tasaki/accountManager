@@ -2,19 +2,13 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>種類</title>
+  <title>@yield('title') - Account Manager</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="container-lg">
-    <header class="row">
-      <div class="col">
-        <a href="{{ url('') }}" class="header-logo">
-          <img src="images/logo.png" alt="Account Manager">
-        </a>
-      </div>
-    </header>
+    @section('header')
     <div class="row">
       <nav class="col">
         

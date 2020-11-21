@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class kindController extends Controller
+class KindController extends Controller
 {
     /**
      * Display a listing of the resource.
