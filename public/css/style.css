@@ -1,0 +1,9 @@
+.header-logo {
+  display: block;
+  height: 70px;
+  width: 70px;
+}
+.header-logo img {
+  height: auto;
+  width: 100%;
+}
