@@ -8,15 +8,48 @@
 </head>
 <body>
   <div class="container-lg">
-    @section('header')
+		<header class="row">
+			<div class="col">
+				<a href="{{ url('') }}" class="header-logo">
+					<img src="images/logo.png" alt="Account Manager">
+				</a>
+			</div>
+		</header>
     <div class="row">
       <nav class="col">
-        
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/">Account Manager</a>
+					</li>
+					@foreach($breadcrumb as $item)
+					@if($item['href'] !== '')
+					<li class="breadcrumb-item">
+						<a href="{{$item['href']}}">{{$item['name']}}</a>
+					</li>
+					@else
+					<li class="breadcrumb-item active" aria-current="page">
+						{{$item['name']}}
+					</li>
+					@endif
+					@endforeach
+				</ol>
       </nav>
     </div>
     <div class="row">
       <nav class="col">
-        左ナビゲーション
+				<ul class="nav flex-column nav-pills">
+					@foreach($leftNav as $item)
+					@if($item['href'] !== '')
+					<li class="nav-item">
+						<a class="nav-link" href="{{$item['href']}}">{{$item['name']}}</a>
+					</li>
+					@else
+					<li class="nav-item">
+						<a class="nav-link active" href="">{{$item['name']}}</a>
+					</li>
+					@endif
+					@endforeach
+				</ul>
       </nav>
       <main class="col">
         コンテンツ
