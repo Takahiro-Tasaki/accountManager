@@ -25,9 +25,9 @@ class CreateAccountTable extends Migration
             $table->timestamp('update_date')->useCurrent();
             $table->timestamp('delete_date')->useCurrent();
             
-            $table->primary(['customer_id', 'account_id']);
-            $table->foreign('customer_id')->references('customer_id')->on('customer');
-            $table->foreign('kind_id')->references('kind_id')->on('kind');
+            $table->primary('account_id');
+            // $table->foreign('customer_id')->references('customer_id')->on('customer');
+            // $table->foreign('kind_id')->references('kind_id')->on('kind');
         });
         
         Schema::table('account', function (Blueprint $table) {

@@ -21,7 +21,7 @@ class CreateLoginTable extends Migration
           $table->timestamp('update_date')->useCurrent();
           
           $table->primary('user_id');
-          $table->foreign('user_id')->references('user_id')->on('user');
+          // $table->foreign('user_id')->references('user_id')->on('user');
         });
     }
 

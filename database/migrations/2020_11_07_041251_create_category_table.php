@@ -16,10 +16,12 @@ class CreateCategoryTable extends Migration
         Schema::create('category', function (Blueprint $table) {
           $table->increments('category_id');
           $table->string('name', 40);
-          $table->unsignedInteger('parent_id');
+          $table->unsignedInteger('parent_id')->default(0);
           $table->timestamp('create_date')->useCurrent();
           $table->timestamp('update_date')->useCurrent();
           $table->timestamp('delete_date')->useCurrent();
+          
+          // $table->foreign('parent_id')->references('category_id')->on('category');
         });
     }
 
