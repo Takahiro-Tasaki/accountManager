@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
-class KindController extends Controller
+class CategoryController extends Controller
 {
     public function callAction($method, $parameters) {
         return parent::callAction($method, array_values($parameters));
     }
-  
+
     /**
      * Display a listing of the resource.
      *
@@ -19,25 +18,22 @@ class KindController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
         $breadcrumb = [
             [
-                'name' => config('consts.kind.KIND_NAME'),
+                'name' => config('consts.category.CATEGORY_NAME'),
                 'href' => ''
             ]
         ];
         $leftNav = [
-            ['name' => '種類', 'href' => 'kind'],
+            ['name' => 'カテゴリー', 'href' => 'category'],
             ['name' => 'サンプル', 'href' => 'sample'],
             ['name' => 'テスト', 'href' => '']
         ];
-        $items = DB::table('kind')->get();
-        return view('kind.index', [
+        $items = DB::table('category')->get();
+        return view('category.index', [
             'breadcrumb' => $breadcrumb,
             'leftNav'    => $leftNav,
-            'items'      => $items,
-            'user'       => $user
+            'items'      => $items
         ]);
     }
 
@@ -50,8 +46,8 @@ class KindController extends Controller
     {
         $breadcrumb = [
             [
-                'name' => config('consts.kind.KIND_NAME'),
-                'href' => config('consts.kind.KIND_PATH')
+                'name' => config('consts.category.CATEGORY_NAME'),
+                'href' => config('consts.category.CATEGORY_PATH')
             ],
             [
                 'name' => '新規登録',
@@ -59,13 +55,15 @@ class KindController extends Controller
             ]
         ];
         $leftNav = [
-            ['name' => '種類', 'href' => config('consts.common.ROOT_PATH') . '/kind'],
+            ['name' => 'カテゴリー', 'href' => config('consts.common.ROOT_PATH') . '/category'],
             ['name' => 'サンプル', 'href' => config('consts.common.ROOT_PATH'). '/sample'],
             ['name' => 'テスト', 'href' => '']
         ];
-        return view('kind.create', [
+        $items = DB::table('category')->get();
+        return view('category.create', [
             'breadcrumb' => $breadcrumb,
-            'leftNav'    => $leftNav
+            'leftNav'    => $leftNav,
+            'items'      => $items
         ]);
     }
 
@@ -78,16 +76,15 @@ class KindController extends Controller
     public function store(Request $request)
     {
         $validate_rule = [
-            'name' => 'required | max:20',
-            'kana' => 'required | max:50'
+            'name' => 'required | max:20'
         ];
         $this->validate($request, $validate_rule);
         $param = [
             'name' => $request->name,
-            'kana' => $request->kana
+            'parent_id' => $request->parent_id
         ];
-        DB::table('kind')->insert($param);
-        return redirect('/kind');
+        DB::table('category')->insert($param);
+        return redirect('/category');
     }
 
     /**
